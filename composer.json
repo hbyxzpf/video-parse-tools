@@ -1,16 +1,16 @@
 {
-    "name": "smalls/video-tools",
-    "description": "短视频的拓展包，集成各大短视频的去水印功能",
+    "name": "hbyxzpf/video-tools",
+    "description": "短视频的拓展包，集成各大短视频的去水印功能,forked from smalls0098/video-parse-tools",
     "type": "library",
     "keywords": [
-        "smalls",
+        "hbyxzpf",
         "video-tools"
     ],
     "license": "MIT",
     "authors": [
         {
-            "name": "Smalls",
-            "email": "smalls0098@gmail.com"
+            "name": "hbyxzpf",
+            "email": "hbyx.zpf@gmail.com"
         }
     ],
     "require": {
