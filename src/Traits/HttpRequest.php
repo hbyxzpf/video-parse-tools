@@ -50,7 +50,7 @@ trait HttpRequest
      * @param array $headers
      * @return mixed|string
      */
-    public function post(string $url = '', array $data = [], array $headers = [])
+    public function post(string $url = '',  $data = [], array $headers = [])
     {
         $options = [
             'headers' => $headers,
