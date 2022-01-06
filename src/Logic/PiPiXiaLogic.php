@@ -35,19 +35,22 @@ class PiPiXiaLogic extends Base
 
     public function setContents()
     {
-        $newGetContentsUrl = 'https://h5.pipix.com/bds/webapi/item/detail/';
+        $newGetContentsUrl = 'https://is.snssdk.com/bds/cell/detail/?cell_type=1&aid=1319&app_name=super&cell_id=';
 
         $contents = $this->get($newGetContentsUrl, [
-            'item_id' => $this->itemId,
+            "cell_type"=>1,
+            "aid"=>1319,
+            "app_name"=>"super",
+            'cell_id' => $this->itemId,
         ], [
             'Referer'    => $newGetContentsUrl,
             'User-Agent' => UserGentType::ANDROID_USER_AGENT
         ]);
 
-        if (empty($contents['data']['item'])) {
+        if (empty($contents['data']['data']['item'])) {
             throw new ErrorVideoException("获取不到指定的内容信息");
         }
-        $this->contents = $contents;
+        $this->contents = $contents['data'];
     }
 
     /**
