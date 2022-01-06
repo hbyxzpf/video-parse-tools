@@ -44,6 +44,7 @@ class ZuiYouLogic extends Base
             'User-Agent' => UserGentType::ANDROID_USER_AGENT,
         ]);
         $this->contents    = $contents;
+        $this->parseId();
     }
 
     public function parseId()
