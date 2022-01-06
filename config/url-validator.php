@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'bili'            => ['b23.tv', 'www.bilibili.com'],
+    'bili'            => ['b23.tv', 'bilibili.com'],
     'douyin'          => ['douyin.com', 'iesdouyin.com'],
     'huoshan'         => ['huoshan.com'],
     'kuaishou'        => ['ziyang.m.kspkg.com', 'kuaishou.com', 'gifshow.com', 'chenzhongtech.com', 'v.kuaishouapp.com'],
