@@ -16,7 +16,7 @@ return [
     'weishi'          => ['weishi.qq.com'],
     'xiaokaxiu'       => ['mobile.xiaokaxiu.com'],
     'xigua'           => ['xigua.com'],
-    'zuiyou'          => ['izuiyou.com'],
+    'zuiyou'          => ['izuiyou.com','share.xiaochuankeji.cn'],
     'weibo'           => ['weibo.com', 'weibo.cn'],
     'newweibo'        => ['video.weibo.com/show'],
     'miaopai'         => ['miaopai.com'],
