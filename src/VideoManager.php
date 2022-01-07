@@ -51,11 +51,11 @@ use Smalls\VideoTools\Tools\ZuiYou;
  * @method static ShuaBao ShuaBao(...$params)
  * @method static XiaoKaXiu XiaoKaXiu(...$params)
  * @method static Bili Bili(...$params)
+ * @method static NewWeiBo NewWeiBo(...$params)
  * @method static WeiBo WeiBo(...$params)
  * @method static MiaoPai MiaoPai(...$params)
  * @method static QQVideo QQVideo(...$params)
  * @method static TaoBao TaoBao(...$params)
- * @method static NewWeiBo NewWeiBo(...$params)
  */
 class VideoManager
 {
