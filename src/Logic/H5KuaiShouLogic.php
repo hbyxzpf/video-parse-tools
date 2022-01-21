@@ -30,9 +30,9 @@ class H5KuaiShouLogic extends Base
                 throw new ErrorVideoException("did获取不到");
             }
             $did = $matches[1];
-            preg_match('/clientid=([0-9]);/', $cookie, $matches);
-            $clientId = isset($matches[1]) ? $matches[1] : 3;
-            $cookie   = 'did=' . $did  . '; clientid=' . $clientId . '; didv=' . time() . '000;';
+//            preg_match('/clientid=([0-9]);/', $cookie, $matches);
+//            $clientId = isset($matches[1]) ? $matches[1] : 3;
+            $cookie   = 'did=' . $did  . '; didv=' . time() . '000;';
         } else {
             $cookie = $this->toolsObj->getCookie();
         }
