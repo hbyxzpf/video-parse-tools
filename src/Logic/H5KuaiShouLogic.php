@@ -41,7 +41,10 @@ class H5KuaiShouLogic extends Base
         }
         $res = $this->get($this->url, [], [
             'User-Agent' => UserGentType::ANDROID_USER_AGENT,
-            'Cookie'     => $cookie
+            'Cookie'     => $cookie,
+            'Host'=>'video.kuaishou.com',
+            'Origin'=>'https://video.kuaishou.com',
+            'Referer'=>$this->url
         ]);
         preg_match('/window\.pageData= ([\s\S]*?)<\/script>/i', $res, $matches);
         if (CommonUtil::checkEmptyMatch($matches)) {
