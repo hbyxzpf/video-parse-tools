@@ -21,22 +21,25 @@ class H5KuaiShouLogic extends Base
 
     public function setContents()
     {
-        if (!$this->toolsObj->getCookie()) {
-            $cookie = $this->getCookie($this->url, [
-                'User-Agent' => UserGentType::ANDROID_USER_AGENT,
-            ]);
-            preg_match('/did=(web_.*?);/', $cookie, $matches);
-            if (CommonUtil::checkEmptyMatch($matches)) {
-                throw new ErrorVideoException("did获取不到");
-            }
-            $did = $matches[1];
-//            preg_match('/clientid=([0-9]);/', $cookie, $matches);
-//            $clientId = isset($matches[1]) ? $matches[1] : 3;
-            $cookie   = 'did=' . $did  . '; didv=' . time() . '000;';
-        } else {
-            $cookie = $this->toolsObj->getCookie();
-        }
-        $res = $this->get($this->url, [], [
+//        if (!$this->toolsObj->getCookie()) {
+//            $cookie = $this->getCookie($this->url, [
+//                'User-Agent' => UserGentType::ANDROID_USER_AGENT,
+//            ]);
+//            preg_match('/did=(web_.*?);/', $cookie, $matches);
+//            if (CommonUtil::checkEmptyMatch($matches)) {
+//                throw new ErrorVideoException("did获取不到");
+//            }
+//            $did = $matches[1];
+////            preg_match('/clientid=([0-9]);/', $cookie, $matches);
+////            $clientId = isset($matches[1]) ? $matches[1] : 3;
+//            $cookie   = 'did=' . $did  . '; didv=' . time() . '000;';
+//        } else {
+//            $cookie = $this->toolsObj->getCookie();
+//        }
+        $lastUrl = $this->redirects($this->url,[
+            'User-Agent' => UserGentType::ANDROID_USER_AGENT,
+        ]);
+        $res = $this->get($lastUrl, [], [
             'User-Agent' => UserGentType::ANDROID_USER_AGENT,
 //            'Cookie'     => $cookie
         ]);
