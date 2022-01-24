@@ -36,10 +36,9 @@ class H5KuaiShouLogic extends Base
         } else {
             $cookie = $this->toolsObj->getCookie();
         }
-        print_r($cookie);
         $res = $this->get($this->url, [], [
             'User-Agent' => UserGentType::ANDROID_USER_AGENT,
-            'Cookie'     => $cookie
+//            'Cookie'     => $cookie
         ]);
         preg_match('/window\.pageData= ([\s\S]*?)<\/script>/i', $res, $matches);
         if (CommonUtil::checkEmptyMatch($matches)) {
