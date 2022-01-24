@@ -24,6 +24,9 @@ class H5KuaiShouLogic extends Base
         if (!$this->toolsObj->getCookie()) {
             $cookie = $this->getCookie($this->url, [
                 'User-Agent' => UserGentType::ANDROID_USER_AGENT,
+                'Host'=>'video.kuaishou.com',
+                'Origin'=>'https://video.kuaishou.com',
+                'Referer'=>$this->url
             ]);
             preg_match('/did=(web_.*?);/', $cookie, $matches);
             if (CommonUtil::checkEmptyMatch($matches)) {
