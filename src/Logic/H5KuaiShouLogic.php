@@ -36,7 +36,7 @@ class H5KuaiShouLogic extends Base
 //        } else {
 //            $cookie = $this->toolsObj->getCookie();
 //        }
-        $lastUrl = $this->redirects($this->url,[
+        $lastUrl = $this->redirects($this->url,[],[
             'User-Agent' => UserGentType::ANDROID_USER_AGENT,
         ]);
         $res = $this->get($lastUrl, [], [
