@@ -79,7 +79,7 @@ class PiPiXiaLogic extends Base
 
     public function getVideoUrl()
     {
-        return isset($this->contents['data']['item']['video']['video_fallback']['url_list'][0]['url']) ? $this->contents['data']['item']['video']['video_fallback']['url_list'][0]['url'] : '';
+        return isset($this->contents['data']['item']['video']['origin_video_download']['url_list'][0]['url']) ? $this->contents['data']['item']['video']['video_fallback']['url_list'][0]['url'] : '';
     }
 
 
