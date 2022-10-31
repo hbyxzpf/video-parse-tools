@@ -106,7 +106,7 @@ class Base extends Common
             $this->logic->getVideoDesc(),
             $this->logic->getVideoImage(),
             $this->logic->getVideoUrl(),
-            method_exists($this->logic,"getType")?$this->logic->getType:"video",
+            method_exists($this->logic,"getType")?$this->logic->getType():"video",
             method_exists($this->logic,"getImageList")?$this->logic->getImageList():[]
         );
         if ($this->println) {
