@@ -78,7 +78,7 @@ class Base extends Common
      * @param string $type
      * @return array
      */
-    protected function returnData(string $url, string $userName, string $userHeadPic, string $desc, string $videoImage, string $videoUrl, string $type): array
+    protected function returnData(string $url, string $userName, string $userHeadPic, string $desc, string $videoImage, string $videoUrl, string $type,array $imageList=[]): array
     {
         return [
             'md5'           => md5($url),
@@ -88,7 +88,8 @@ class Base extends Common
             'desc'          => $desc,
             'img_url'       => $videoImage,
             'video_url'     => $videoUrl,
-            'type'          => $type
+            'type'          => $type,
+            "image_list" => $imageList
         ];
     }
 
@@ -105,7 +106,8 @@ class Base extends Common
             $this->logic->getVideoDesc(),
             $this->logic->getVideoImage(),
             $this->logic->getVideoUrl(),
-            'video'
+            method_exists($this->logic,"getType")?$this->logic->getType:"video",
+            method_exists($this->logic,"getImageList")?$this->logic->getImageList():[]
         );
         if ($this->println) {
             var_dump($data);

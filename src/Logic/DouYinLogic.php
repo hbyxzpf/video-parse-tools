@@ -112,4 +112,11 @@ class DouYinLogic extends Base
         return CommonUtil::getData($this->contents['item_list'][0]['author']['avatar_larger']['url_list'][0]);
     }
 
+    public function getImageList(){
+        return $this->contents["item_list"][0]["images"][0]['url_list'];
+    }
+
+    public function getType(){
+        return (CommonUtil::getData($this->contents["item_list"][0]['aweme_type']) == 2)?"image":"video";
+    }
 }
