@@ -113,7 +113,13 @@ class DouYinLogic extends Base
     }
 
     public function getImageList(){
-        return !empty($this->contents["item_list"][0]["images"])?$this->contents["item_list"][0]["images"][0]['download_url_list']:[];
+        $images = [];
+        if (!empty($this->contents["item_list"][0]["images"])){
+            foreach ($this->contents["item_list"][0]["images"] as $image){
+                $images[] =  $image["url_list"][3];
+            }
+        }
+        return $images;
     }
 
     public function getType(){
