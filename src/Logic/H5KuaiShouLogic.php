@@ -21,7 +21,7 @@ class H5KuaiShouLogic extends Base
 
     public function setContents()
     {
-        $longUrl = $this->redirects($this->url);
+        $longUrl = $this->redirects($this->url,[],[],false,false);
         $queryStr = parse_url($longUrl,PHP_URL_QUERY);
         parse_str($queryStr,$queryArr);
         $data = collect($queryArr)->only(["fid","shareToken","shareObjectId","shareMethod","shareId","shareResourceType","shareChannel","kpn","subBiz","env","photoId"])->toArray();
