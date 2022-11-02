@@ -21,36 +21,20 @@ class H5KuaiShouLogic extends Base
 
     public function setContents()
     {
-        if (!$this->toolsObj->getCookie()) {
-            $cookie = $this->getCookie($this->url, [
-                'User-Agent' => UserGentType::ANDROID_USER_AGENT,
-                'Host'=>'video.kuaishou.com',
-                'Origin'=>'https://video.kuaishou.com',
-                'Referer'=>$this->url
-            ]);
-            preg_match('/did=(web_.*?);/', $cookie, $matches);
-            if (CommonUtil::checkEmptyMatch($matches)) {
-                throw new ErrorVideoException("did获取不到");
-            }
-            $did = $matches[1];
-//            preg_match('/clientid=([0-9]);/', $cookie, $matches);
-//            $clientId = isset($matches[1]) ? $matches[1] : 3;
-            $cookie   = 'did=' . $did  . '; didv=' . time() . '000;';
-        } else {
-            $cookie = $this->toolsObj->getCookie();
-        }
-        $res = $this->get($this->url, [], [
-            'User-Agent' => UserGentType::ANDROID_USER_AGENT,
-            'Cookie'     => $cookie,
-            'Host'=>'video.kuaishou.com',
-            'Origin'=>'https://video.kuaishou.com',
-            'Referer'=>$this->url
+        $longUrl = $this->redirects($this->url);
+        $queryStr = parse_url($longUrl,PHP_URL_QUERY);
+        parse_str($queryStr,$queryArr);
+        $data = collect($queryArr)->only(["fid","shareToken","shareObjectId","shareMethod","shareId","shareResourceType","shareChannel","kpn","subBiz","env","photoId"])->toArray();
+        $data["isLongVideo"] = false;
+        $data["h5Domain"] = "v.m.chenzhongtech.com";
+        $resp = $this->post("https://m.gifshow.com/rest/wd/photo/info?kpn=KUAISHOU&captchaToken=",json_encode($data),[
+            "Content-Type"=>"application/json",
+            "user-agent"=>"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36",
+            "Cookie"=>"_did=web_518883321649BCF8; did=web_94a05b1178c34af3b97bc4d644d8c963",
+            "Referer"=>$longUrl
         ]);
-        preg_match('/window\.pageData= ([\s\S]*?)<\/script>/i', $res, $matches);
-        if (CommonUtil::checkEmptyMatch($matches)) {
-            throw new ErrorVideoException("contents获取不到");
-        }
-        $this->contents = json_decode($matches[1], true);
+        file_put_contents("/Users/zhaopengfei/Desktop/test.json",json_encode($resp,JSON_UNESCAPED_UNICODE));
+        $this->contents = $resp;
     }
 
     /**
@@ -72,17 +56,31 @@ class H5KuaiShouLogic extends Base
 
     public function getVideoUrl()
     {
-        return isset($this->contents['video']['srcNoMark']) ? $this->contents['video']['srcNoMark'] : '';
+        return isset($this->contents["photo"]["mainMvUrls"])?$this->contents["photo"]["mainMvUrls"][0]["url"]:"";
     }
 
     public function getVideoImage()
     {
-        return isset($this->contents['video']['poster']) ? $this->contents['video']['poster'] : '';
+        return isset($this->contents["photo"]["coverUrls"])?$this->contents["photo"]["coverUrls"][0]["url"]:"";
     }
 
+    public function getImageList()
+    {
+        $return = [];
+        if (isset($this->contents["atlas"]["list"])){
+            foreach ($this->contents["atlas"]["list"] as $link){
+                $return[] = sprintf("https://%s%s",$this->contents["atlas"]["cdn"][0],$link);
+            }
+        }
+        return $return;
+    }
+
+    public function getType(){
+        return $this->getVideoUrl()?"video":"image";
+    }
     public function getVideoDesc()
     {
-        return isset($this->contents['video']['caption']) ? $this->contents['video']['caption'] : '';
+        return $this->contents["photo"]["caption"]??"";
     }
 
     public function getUsername()
@@ -96,6 +94,5 @@ class H5KuaiShouLogic extends Base
         return isset($this->contents['user']['name']) ? $this->contents['user']['name'] : '';
 
     }
-
 
 }
