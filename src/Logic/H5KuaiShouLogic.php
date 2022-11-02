@@ -75,7 +75,7 @@ class H5KuaiShouLogic extends Base
     }
 
     public function getType(){
-        return $this->getVideoUrl()?"video":"image";
+        return $this->getImageList()?"image":"video";
     }
     public function getVideoDesc()
     {
