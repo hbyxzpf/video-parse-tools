@@ -62,6 +62,12 @@ trait HttpRequest
             $options['form_params'] = $data;
         }
 
+        if ($this->isProxy) {
+            $options['proxy'] = [
+                'http'  => $this->proxyIpPort,
+                'https' => $this->proxyIpPort,
+            ];
+        }
         return $this->request('post', $url, $options);
     }
 
