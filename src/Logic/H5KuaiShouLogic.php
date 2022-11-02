@@ -33,7 +33,6 @@ class H5KuaiShouLogic extends Base
             "Cookie"=>"_did=web_518883321649BCF8; did=web_94a05b1178c34af3b97bc4d644d8c963",
             "Referer"=>$longUrl
         ]);
-        file_put_contents("/Users/zhaopengfei/Desktop/test.json",json_encode($resp,JSON_UNESCAPED_UNICODE));
         $this->contents = $resp;
     }
 
