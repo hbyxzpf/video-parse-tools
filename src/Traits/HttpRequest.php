@@ -107,11 +107,18 @@ trait HttpRequest
      */
     public function redirects($url, $query = [], $headers = [], $isAllReturn = false)
     {
-        $response = $this->getHttpClient($this->getBaseOptions())->get($url, [
+        $options = [
             'headers'         => $headers,
             'query'           => $query,
             'allow_redirects' => false,
-        ]);
+        ];
+        if ($this->isProxy) {
+            $options['proxy'] = [
+                'http'  => $this->proxyIpPort,
+                'https' => $this->proxyIpPort,
+            ];
+        }
+        $response = $this->getHttpClient($this->getBaseOptions())->get($url,$options);
         if (substr((string)$response->getStatusCode(), 0, 2) === '30') {
             $headers = $response->getHeaders();
             if ($isAllReturn) {
