@@ -105,14 +105,14 @@ trait HttpRequest
      * @param bool $isAllReturn
      * @return mixed|string
      */
-    public function redirects($url, $query = [], $headers = [], $isAllReturn = false)
+    public function redirects($url, $query = [], $headers = [], $isAllReturn = false,$useProxy=false)
     {
         $options = [
             'headers'         => $headers,
             'query'           => $query,
             'allow_redirects' => false,
         ];
-        if ($this->isProxy) {
+        if ($this->isProxy and $useProxy) {
             $options['proxy'] = [
                 'http'  => $this->proxyIpPort,
                 'https' => $this->proxyIpPort,
