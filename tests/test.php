@@ -15,21 +15,21 @@ require '../vendor/autoload.php';
 //    ->start("https://v.ixigua.com/JPk2Mxb/");
 //
 
-$res = VideoManager::TouTiao()
-    ->println()
-    ->start("https://m.toutiaoimg.cn/group/6862508958330932492/?app=news_article_lite×tamp=1602815645");
+//$res = VideoManager::TouTiao()
+//    ->println()
+//    ->start("https://m.toutiaoimg.cn/group/6862508958330932492/?app=news_article_lite×tamp=1602815645");
 
 //$res = VideoManager::LiVideo()
 //    ->println()
 //    ->start("https://www.pearvideo.com/detail_1671290?st=7");
 
 
-//VideoManager::DouYin()
-//    ->setIsCheckUrl(true)
-//    ->setUrlValidator(['douyin.com', 'iesdouyin.com'])
-//    ->println()
-//    ->start("https://v.douyin.com/JeoLRe4/");
-//
+VideoManager::DouYin()
+    ->setIsCheckUrl(true)
+    ->setUrlValidator(['douyin.com', 'iesdouyin.com'])
+    ->println()
+    ->start("https://v.douyin.com/BTWhfHA/");
+
 //VideoManager::KuaiShou()
 //    ->setCookie('did=web_e19cfe96787746a5b4311f56acaf5be4; didv=1593660908000; clientid=3; client_key=65890b29; Hm_lvt_86a27b7db2c5c0ae37fee4a8a35033ee=1594966818,1595649199; sid=6281151b7052a88cfaba3a43')
 //    ->println()
