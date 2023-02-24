@@ -37,11 +37,15 @@ class DouYinLogic extends Base
 
     public function setContents()
     {
-        $contents = $this->get('https://www.iesdouyin.com/web/api/v2/aweme/iteminfo', [
-            'item_ids' => $this->itemId,
+        $contents = $this->get('https://www.iesdouyin.com/aweme/v1/web/aweme/detail/', [
+            'aweme_id' => $this->itemId,
+            'aid'=>1128,
+            "version_name"=>"23.5.0",
+            "device_platform"=>"android",
+            "os_version"=>"2333"
         ], [
             // @Todo 分析此接口header校验规则，完善参数
-            'User-Agent' => UserGentType::POSTMAN_USER_AGENT, // user-agent请求中必须，否则返回状态码444。常规UA无有效数据返回，可能存在某种校验，临时使用postmanUA头，保证正常返回
+            'User-Agent' => UserGentType::ANDROID_USER_AGENT, // user-agent请求中必须，否则返回状态码444。常规UA无有效数据返回，可能存在某种校验，临时使用postmanUA头，保证正常返回
             'Referer'    => "https://www.iesdouyin.com",
             'Host'       => "www.iesdouyin.com",
         ]);
